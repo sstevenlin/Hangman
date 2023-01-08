@@ -1,0 +1,78 @@
+mport java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+    public static int num(){
+        return (int)(Math.random()*5);
+    }
+    public static void main(String[] args) throws Exception {
+        boolean play = true;
+        while(play){
+        Scanner sc = new Scanner(System.in);
+        String finals = "";
+        String[] words = {"turkey", "potato", "stuffing", "gravy", "november"};
+        
+        int i = 0;
+        int random = num();
+        String word = words[random];
+        int rand = (int)(Math.random()*word.length());
+        boolean wordunfound = true;
+        String[] wordunknown = new String[word.length()];
+        for(int j = 0; j < word.length(); j++){
+          if(j == rand){
+            wordunknown[j] = String.valueOf(word.charAt(j));
+            
+            }
+        else{
+            wordunknown[j] = "_";
+            
+            }
+            
+        }
+        while(i < 3 && wordunfound == true){
+            
+            if(finals.equals(word)){
+                wordunfound=false; 
+                break;  
+            }
+            finals = "";
+            for(int l = 0; l < word.length(); l++){
+                
+                System.out.print(wordunknown[l]);
+                
+            }
+            System.out.println();
+            String playerchoice = sc.nextLine();
+            playerchoice = String.valueOf(playerchoice.charAt(0));
+            
+            if(word.contains(playerchoice)){
+                int f = word.indexOf(playerchoice);
+                
+                wordunknown[f] = playerchoice;
+                for(int p = 0; p < word.length();p++){
+                    finals += wordunknown[p];
+                }
+                System.out.println(finals);
+            }
+            else{
+                
+                i++;
+                
+            }
+            
+
+        }
+        if(wordunfound)System.out.println("You lost the word was " + word);
+        
+        else{
+            System.out.println("YOU WIN");
+        
+        }
+        System.out.println("Do you wanna play again");
+        String check = sc.nextLine();
+        if(check.toLowerCase().equals("no")){
+            play = false;
+        }
+    }
+}
+}
